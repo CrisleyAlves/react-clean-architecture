@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES6",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -16,13 +16,13 @@
       "@/*": ["*"]
     },
     "allowJs": true,
-    "skipDefaultLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    // "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    // "skipDefaultLibCheck": true,
+    // "allowSyntheticDefaultImports": true,
+    // "strict": true,
+    // "forceConsistentCasingInFileNames": true,
     // "isolatedModules": true,
-    "noEmit": true
+    // "noEmit": true
   },
   "include": [
     "src"
