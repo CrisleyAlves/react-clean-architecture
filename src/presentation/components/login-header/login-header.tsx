@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import Styles from './login-header-styles.scss';
+import React, { memo } from 'react'
+import Styles from './login-header-styles.scss'
 
-import { Logo } from '@/presentation/components/';
+import { Logo } from '@/presentation/components/'
 
 const LoginHeader: React.FC = () => {
   return (
@@ -12,4 +12,4 @@ const LoginHeader: React.FC = () => {
   )
 }
 
-export default memo(LoginHeader);
+export default memo(LoginHeader)

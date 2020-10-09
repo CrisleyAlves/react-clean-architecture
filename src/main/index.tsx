@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { Login } from '@/presentation/pages/';
+import { Login } from '@/presentation/pages/'
 
 ReactDOM.render(
   <Login />,
   document.querySelector('#main')
-);
+)
