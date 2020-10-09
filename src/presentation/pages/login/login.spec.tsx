@@ -6,7 +6,7 @@ import { debug } from 'console'
 
 describe('Login Component', () => {
   test('Should start with initial state', () => {
-    const { getByTestId, debug } = render(<Login />)
+    const { getByTestId } = render(<Login />)
 
     const errorWrapper = getByTestId('error-wrapper')
     expect(errorWrapper.childElementCount).toBe(0)
@@ -19,6 +19,6 @@ describe('Login Component', () => {
     
     const passwordStatus = getByTestId('password-status')
     expect(passwordStatus.title).toBe('Required field') 
-    expect(passwordStatus.innerHTML).toBe('<i class="fas fa-times"></i>'
+    expect(passwordStatus.innerHTML).toBe('<i class="fas fa-times"></i>')
   })
 })
