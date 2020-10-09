@@ -1,0 +1,33 @@
+@import '../../styles/colors.scss';
+
+.inputWrapper {
+  display: flex;
+  margin-top: 16px;
+  position: relative;
+  align-items: center;
+
+
+  input {
+    flex-grow: 1;        
+  }
+
+  .status {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 12px;
+    cursor: help;
+  }
+}
+
+input[type="email"],
+input[type="password"] {
+  border: 1px solid $primaryLight;
+  line-height: 40px;
+  border-radius: 4px;
+  padding: 0px 40px 0px 0px;
+
+  &:focus {
+    outline-color: $primaryLight;
+  }
+}
