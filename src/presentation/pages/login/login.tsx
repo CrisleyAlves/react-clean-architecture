@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Styles from './login-styles.scss'
 import { Footer, LoginHeader, FormStatus, Input } from '@/presentation/components/'
 
-import FormContext from '@/presentation/context/form/form-context';
-import { StateType } from '@/presentation/context/form/types';
+import FormContext from '@/presentation/context/form/form-context'
+import { StateType } from '@/presentation/context/form/types'
 
 const Login: React.FC = () => {
   const [state] = useState<StateType>({
