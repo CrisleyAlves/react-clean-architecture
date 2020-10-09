@@ -5,25 +5,36 @@ import FormContext from '@/presentation/context/form/form-context'
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 const Input: React.FC<Props> = (props: Props) => {
-  const { errorState } = useContext(FormContext)
-  
+  const { state, setState } = useContext(FormContext)
+
   const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     event.target.readOnly = false
   }
 
-  const getStatus = () => <i className="fas fa-times"></i>;
+  const handleChange = (event: React.FocusEvent<HTMLInputElement>): void => setState({
+    ...state,
+    [event.target.name]: event.target.value
+  })
 
-  const getTitle = () => errorState[props.name];
+  const getStatus = (): React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> => <i className="fas fa-times"></i>
+
+  const getTitle = (): string => state.emailError
 
   return (
     <div className={Styles.inputWrapper}>
-      <input {...props} readOnly onFocus={enableInput} />
+      <input
+        {...props}
+        data-testid={props.name}
+        readOnly
+        onFocus={enableInput}
+        onChange={handleChange}
+      />
       <span
         data-testid={`${props.name}-status`}
         title={getTitle()}
         className={Styles.status}>
-          {getStatus()}
-        </span>
+        {getStatus()}
+      </span>
     </div>
   )
 }
