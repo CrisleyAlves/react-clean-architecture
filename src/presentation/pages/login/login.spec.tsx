@@ -5,6 +5,7 @@ import { ValidationSpy } from '@/presentation/test'
 import { render, RenderResult, fireEvent, cleanup } from '@testing-library/react'
 
 import Login from './login'
+import { debug } from 'console'
 
 type SutTypes = {
   sut: RenderResult
@@ -31,9 +32,6 @@ describe('Login Component', () => {
 
     const errorWrapper = sut.getByTestId('error-wrapper')
     expect(errorWrapper.childElementCount).toBe(0)
-
-    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
-    expect(submitButton.disabled).toBeTruthy()
 
     const emailStatus = sut.getByTestId('email-status')
     expect(emailStatus.title).toBe('')
@@ -73,5 +71,19 @@ describe('Login Component', () => {
 
     const emailStatus = sut.getByTestId('email-status')
     expect(emailStatus.title).toBe(validationSpy.errorMessage)
+  })
+
+  test('Should enable submit button if form is valid', () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.errorMessage = '';
+    
+    const emailInput = sut.getByTestId('email')
+    fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
+
+    const emailStatus = sut.getByTestId('email-status')
+    expect(emailStatus.title).toBe(validationSpy.errorMessage)
+
+    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
+    expect(submitButton.disabled).toBeFalsy()
   })
 })
