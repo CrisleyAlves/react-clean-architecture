@@ -36,11 +36,11 @@ describe('Login Component', () => {
     expect(submitButton.disabled).toBeTruthy()
 
     const emailStatus = sut.getByTestId('email-status')
-    expect(emailStatus.title).toBe(validationSpy.errorMessage)
+    expect(emailStatus.title).toBe('')
 
     const passwordStatus = sut.getByTestId('password-status')
-    expect(passwordStatus.title).toBe(validationSpy.errorMessage)
-    expect(passwordStatus.innerHTML).toBe('<i class="fas fa-times"></i>')
+    expect(passwordStatus.title).toBe('')
+    expect(passwordStatus.innerHTML).toBe('<i></i>')
   })
 
   test('Should call Validation with correct email', () => {
