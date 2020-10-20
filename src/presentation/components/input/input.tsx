@@ -16,7 +16,10 @@ const Input: React.FC<Props> = (props: Props) => {
     [event.target.name]: event.target.value
   })
 
-  const getStatus = (): React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> => <i className="fas fa-times"></i>
+  const getStatus = (): React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> => {
+    const hasError = !!state.emailError || !!state.passwordError;
+    return hasError ? <i className="fas fa-times"></i> : <i />
+  }
 
   const getTitle = (): string => state.emailError
 
