@@ -14,7 +14,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const validationSpy = new ValidationSpy()
   validationSpy.errorMessage = 'any_error'
-  
+
   const sut = render(<Login validation={validationSpy} />)
 
   return {
@@ -64,7 +64,7 @@ describe('Login Component', () => {
 
   test('Should show email error if validation fails', () => {
     const { sut, validationSpy } = makeSut()
-    
+
     const emailInput = sut.getByTestId('email')
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
 
@@ -74,8 +74,8 @@ describe('Login Component', () => {
 
   test('Should enable submit button if form is valid', () => {
     const { sut, validationSpy } = makeSut()
-    validationSpy.errorMessage = '';
-    
+    validationSpy.errorMessage = ''
+
     const emailInput = sut.getByTestId('email')
     fireEvent.input(emailInput, { target: { value: faker.internet.email() } })
 

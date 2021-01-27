@@ -17,7 +17,7 @@ const Input: React.FC<Props> = (props: Props) => {
   })
 
   const getStatus = (): React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> => {
-    const hasError = !!state.emailError || !!state.passwordError;
+    const hasError = !!state.emailError || !!state.passwordError
     return hasError ? <i className="fas fa-times"></i> : <i />
   }
 
