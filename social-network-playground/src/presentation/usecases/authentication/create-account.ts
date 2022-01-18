@@ -31,7 +31,7 @@ const FORM_INITIAL_STATE: CreateAccountParams = {
   password: ''
 }
 
-const STATUS_INITIAL_VALUE: ISTATUS = {
+const STATUS_INITIAL_STATE: ISTATUS = {
   loading: false,
   mainError: null,
   errors: [],
@@ -40,7 +40,7 @@ const STATUS_INITIAL_VALUE: ISTATUS = {
 
 function useCreateAccount (): IUSE_CREATE_ACCOUNT {
   const [form, setForm] = useState<CreateAccountParams>(FORM_INITIAL_STATE)
-  const [status, setStatus] = useState<ISTATUS>(STATUS_INITIAL_VALUE)
+  const [status, setStatus] = useState<ISTATUS>(STATUS_INITIAL_STATE)
   const history = useHistory()
 
   const onChangeField = (fieldName: string, fieldValue: string): void => {
@@ -52,7 +52,7 @@ function useCreateAccount (): IUSE_CREATE_ACCOUNT {
 
     if (errors.length === 0) {
       setStatus({
-        ...STATUS_INITIAL_VALUE,
+        ...STATUS_INITIAL_STATE,
         isValid: true
       })
       return true

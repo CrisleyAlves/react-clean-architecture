@@ -5,6 +5,7 @@ export class CreateAccountValidator implements CreateAccountValidation {
   errors?: [ParamError?] = []
 
   validate (params: CreateAccountParams): ParamError[] {
+    this.errors = []
     for (const param in params) {
       if (params[param].length === 0) {
         const error = {
