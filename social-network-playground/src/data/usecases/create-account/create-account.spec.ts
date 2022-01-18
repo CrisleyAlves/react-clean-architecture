@@ -6,19 +6,29 @@ import { CreateAccountService } from './create-account'
 import { mockAccountModel, mockCreateAccount } from '@/domain/test'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { ServerError, UnexpectedError } from '@/domain/errors'
+import { CreateAccountValidation, ParamError } from '@/data/protocols/validation/create-account-validation'
 
 interface SutTypes {
   sut: CreateAccountService
   httpPostClientSpy: HttpPostClientSpy<CreateAccountParams, AccountModel>
+  createAccountValidatorStub: CreateAccountValidatorStub
+}
+
+class CreateAccountValidatorStub implements CreateAccountValidation {
+  validate (params: CreateAccountParams): ParamError[] {
+    return []
+  }
 }
 
 const makeSut = (url: string = faker.internet.url()): SutTypes => {
+  const createAccountValidatorStub = new CreateAccountValidatorStub()
   const httpPostClientSpy = new HttpPostClientSpy<CreateAccountParams, AccountModel>()
-  const sut = new CreateAccountService(url, httpPostClientSpy)
+  const sut = new CreateAccountService(url, createAccountValidatorStub, httpPostClientSpy)
 
   return {
     sut,
-    httpPostClientSpy
+    httpPostClientSpy,
+    createAccountValidatorStub
   }
 }
 
@@ -64,5 +74,32 @@ describe('CreateAccount', () => {
     }
     const account = await sut.createAccount(mockCreateAccount())
     await expect(account).toEqual(httpResult)
+  })
+
+  test('Should call validate function and return no errors', () => {
+    const { sut } = makeSut()
+    jest.spyOn(sut, 'validate')
+    const mockedCreateAccount = mockCreateAccount()
+    const errorList = sut.validate(mockedCreateAccount)
+
+    expect(sut.validate).toHaveBeenCalledWith(mockedCreateAccount)
+    expect(errorList.length).toBe(0)
+  })
+
+  test('Should call validate function and return with errors list', () => {
+    const { sut } = makeSut()
+    jest.spyOn(sut, 'validate').mockReturnValueOnce([{
+      name: 'first_name',
+      value: null,
+      message: 'required field'
+    }])
+    const mockedCreateAccount = mockCreateAccount()
+    const errorList = sut.validate(mockedCreateAccount)
+    expect(sut.validate).toHaveBeenCalledWith(mockedCreateAccount)
+    expect(errorList).toEqual([{
+      name: 'first_name',
+      value: null,
+      message: 'required field'
+    }])
   })
 })
