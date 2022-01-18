@@ -20,7 +20,7 @@ export const mockAccountModel = (): AccountModel => ({
 export const mockCreateAccount = (): CreateAccountParams => ({
   first_name: faker.name.firstName(),
   last_name: faker.name.lastName(),
-  gender: faker.random.word(),
+  gender: 'male',
   email: faker.internet.email(),
   password: faker.random.word()
 })
